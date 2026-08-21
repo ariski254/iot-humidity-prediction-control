@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartHome AI · Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div>
+                    <span class="brand-name">SmartHome</span>
+                    <span class="brand-sub">AI Control</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-view="dashboard">Dashboard</a>
+                <a href="#" class="nav-item" data-view="history">History</a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="status-dot pulse"></div>
+                <span>System Online</span>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <h1 id="page-title">Dashboard</h1>
+                    <span class="header-subtitle">Real‑time Monitoring & Control</span>
+                </div>
+                <div class="header-right">
+                    <div class="live-badge">
+                        <span class="live-dot"></span>
+                        <span>LIVE</span>
+                    </div>
+                    <span class="header-time" id="header-time">--:--:--</span>
+                </div>
+            </header>
+
+            <!-- Dashboard View -->
+            <div id="view-dashboard" class="view active">
+                <!-- Cards -->
+                <section class="cards-grid">
+                    <div class="card glass">
+                        <div class="card-header"><span class="card-label">Humidity</span></div>
+                        <div class="card-value" id="humidity-value">--<span class="unit">%</span></div>
+                        <div class="card-footer">
+                            <span class="trend" id="humidity-trend">--</span>
+                            <span class="card-time" id="humidity-time">--</span>
+                        </div>
+                    </div>
+                    <div class="card glass">
+                        <div class="card-header"><span class="card-label">Temperature</span></div>
+                        <div class="card-value" id="temperature-value">--<span class="unit">°C</span></div>
+                        <div class="card-footer">
+                            <span class="trend" id="temperature-trend">--</span>
+                            <span class="card-time" id="temperature-time">--</span>
+                        </div>
+                    </div>
+                    <div class="card glass">
+                        <div class="card-header"><span class="card-label">Air Quality</span></div>
+                        <div class="card-value" id="aq-value">--</div>
+                        <div class="card-footer">
+                            <span class="badge-status" id="aq-status">--</span>
+                            <span class="card-time" id="aq-time">--</span>
+                        </div>
+                    </div>
+                    <div class="card glass">
+                        <div class="card-header"><span class="card-label">Fan Speed</span></div>
+                        <div class="card-value" id="fan-speed">--<span class="unit">%</span></div>
+                        <div class="card-footer">
+                            <span class="badge-mode" id="fan-mode-badge">AUTO</span>
+                            <span class="card-time">Active</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Fan Control & Predictions -->
+                <section class="control-section glass">
+                    <div class="fan-control">
+                        <div class="fan-control-left">
+                            <span class="control-label">Fan Control</span>
+                            <div class="mode-buttons">
+                                <button class="mode-btn active" data-mode="AUTO">Auto</button>
+                                <button class="mode-btn" data-mode="ON">On</button>
+                                <button class="mode-btn" data-mode="OFF">Off</button>
+                            </div>
+                        </div>
+                        <div class="fan-speed-display">
+                            <div class="fan-speed-bar">
+                                <div class="fan-speed-track">
+                                    <div class="fan-speed-fill" id="fan-fill" style="width:0%"></div>
+                                </div>
+                                <div class="fan-speed-labels">
+                                    <span>0%</span>
+                                    <span id="fan-speed-label">0%</span>
+                                    <span>100%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="predictions-grid">
+                        <div class="pred-card glass-light">
+                            <div class="pred-header"><span class="pred-label">1 Hour Forecast</span></div>
+                            <div class="pred-value" id="pred1h">--<span class="unit">%</span></div>
+                            <div class="pred-footer"><span class="pred-desc">Feedforward</span></div>
+                        </div>
+                        <div class="pred-card glass-light">
+                            <div class="pred-header"><span class="pred-label">6 Hour Forecast</span></div>
+                            <div class="pred-value" id="pred6h">--<span class="unit">%</span></div>
+                            <div class="pred-footer"><span class="pred-desc">Medium‑term</span></div>
+                        </div>
+                        <div class="pred-card glass-light">
+                            <div class="pred-header"><span class="pred-label">12 Hour Forecast</span></div>
+                            <div class="pred-value" id="pred12h">--<span class="unit">%</span></div>
+                            <div class="pred-footer"><span class="pred-desc">Long‑term</span></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Charts -->
+                <section class="charts-section">
+                    <div class="chart-card glass">
+                        <div class="chart-header">
+                            <h3>Humidity History</h3>
+                            <div class="chart-legend">
+                                <span><span class="legend-dot" style="background:#2b6cb0;"></span> Actual</span>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="humidityChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card glass">
+                        <div class="chart-header">
+                            <h3>Temperature & Air Quality</h3>
+                            <div class="chart-legend">
+                                <span><span class="legend-dot" style="background:#e53e3e;"></span> Temp</span>
+                                <span><span class="legend-dot" style="background:#dd6b20;"></span> AQ</span>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="tempAqChart"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="dashboard-footer">
+                    <span>Data diperbarui setiap 3 detik</span>
+                    <span id="last-update">--</span>
+                </div>
+            </div>
+
+            <!-- History View -->
+            <div id="view-history" class="view">
+                <section class="history-section glass">
+                    <div class="history-header">
+                        <h2>Data History</h2>
+                        <button class="btn-refresh" onclick="loadHistory()">↻ Refresh</button>
+                    </div>
+                    <div class="table-wrapper">
+                        <table id="history-table">
+                            <thead>
+                                <tr><th>#</th><th>Timestamp</th><th>Humidity</th><th>Temperature</th><th>Air Quality</th></tr>
+                            </thead>
+                            <tbody id="history-body">
+                                <tr><td colspan="5" style="text-align:center; color:#a0aec0;">Loading...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>

@@ -82,22 +82,6 @@ SmartHome/
 
 ---
 
-## 🔄 Alur Sistem (Arsitektur)
-
-```mermaid
-graph TD
-    A[Sensor DHT22 & MQ135] -->|Data Lingkungan| B(ESP32 Node)
-    B -->|HTTP POST JSON| C{FastAPI Backend}
-    C -->|Prediksi| D(GA-LSTM Model)
-    D -->|Target Kelembapan| E(Fuzzy Logic Controller)
-    C -->|Kondisi Saat Ini| E
-    E -->|Sinyal PWM 0-100%| B
-    B -->|Kontrol Hardware| F[Kipas / Fan]
-    C -->|Visualisasi Data| G[Web Dashboard]
-```
-
----
-
 ## 🛠️ Instalasi dan Menjalankan Sistem
 
 ### 1. Backend FastAPI
@@ -161,19 +145,6 @@ Apabila ESP32 **kehilangan koneksi** dengan backend server, sistem tidak akan be
 ## 📌 Catatan & Troubleshooting
 - Pastikan IP komputer server *reachable* dari ESP32 (cek IP menggunakan `ipconfig` di Windows atau `ifconfig` di Linux).
 - Pastikan *port 8000* tidak diblokir oleh Firewall.
-- Folder `backend/data/` akan dibuat otomatis saat aplikasi dijalankan untuk menyimpan model dan log metrik hasil training.
+- Folder `data/` akan dibuat otomatis saat aplikasi dijalankan untuk menyimpan model dan log metrik hasil training.
 
 ---
-
-## 🚀 Pengembangan Selanjutnya (To-Do)
-- [ ] Integrasi protokol MQTT untuk komunikasi IoT yang lebih andal.
-- [ ] Migrasi penyimpanan data historis ke PostgreSQL atau InfluxDB.
-- [ ] Implementasi sistem Autentikasi (Login) pada dashboard web.
-- [ ] Fitur notifikasi peringatan (Telegram/Email) ketika kelembapan melebihi ambang batas.
-- [ ] Visualisasi performa model (MAE, RMSE, R²) langsung di dalam UI Dashboard.
-- [ ] *Deployment* backend menggunakan Docker (`Dockerfile` & `docker-compose.yml`).
-
-<br>
-<div align="center">
-  <sub>Dibuat dengan ❤️ untuk lingkungan tropis yang lebih baik.</sub>
-</div>

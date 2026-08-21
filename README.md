@@ -102,15 +102,10 @@ graph TD
 
 ### 1. Backend FastAPI
 
-Masuk ke folder backend dan install *dependencies*:
+Install *dependencies*:
 
 ```bash
-cd backend
 pip install -r requirements.txt
-```
-*(Jika `requirements.txt` belum tersedia, install secara manual:)*
-```bash
-pip install fastapi uvicorn sqlalchemy numpy tensorflow scikit-fuzzy scikit-learn deap apscheduler
 ```
 
 Jalankan server:

@@ -24,11 +24,11 @@
 #define RTC_CE 23
 
 // alamat server backend
-const String serverIP = "http://10.45.91.73:8000";
+const String serverIP = "http://YourServerIP";  // ganti dengan IP server backend Anda
 
 // wifi cadangan
-const char* WIFI_SSID = "Free_Wife";
-const char* WIFI_PASSWORD = "00000000";
+const char* WIFI_SSID = "YourSSID";  // ganti dengan SSID WiFi Anda
+const char* WIFI_PASSWORD = "YourPassword";  // ganti dengan password WiFi Anda
 
 // interval waktu dalam milidetik
 const unsigned long SENSOR_INTERVAL = 1000;       // baca sensor tiap 1 detik
